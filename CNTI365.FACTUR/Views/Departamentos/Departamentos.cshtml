@@ -1,0 +1,145 @@
+﻿@model modelList
+@using CNTI365.FACTUR.Models
+@{
+    ViewBag.Title = "Departamentos";
+}
+
+<br />
+<br />
+<br />
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <b>PRODUCTOS</b>
+        <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button class="btn btn-default" id="btncatalogo"><img src="~/Content/img/imagenes/calendario.png" alt="Alternate Text" /> Catálogo</button>
+            <button class="btn btn-default" id="btndepartamentos"><img src="~/Content/img/imagenes/departamento.png" alt="Alternate Text" /> Departamentos</button>
+            <button class="btn btn-default" id="btnpromociones"><img src="~/Content/img/imagenes/estrella.png" alt="Alternate Text" /> Promociones</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/expediente.png" alt="Alternate Text" /> Importar</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/xls.png" alt="Alternate Text" /> Exportar</button>
+        </div>
+
+        <div class="col-ms-12">
+            <center>
+                <h3 style="color:#ff6a00;" id="lblprin"> </h3>
+            </center>
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="divdepartamento">
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="txtbuscadorp" placeholder="Buscar producto" />
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-default" id="btnewd"><img src="~/Content/img/imagenes/new.png" alt="Alternate Text" /> Nuevo</button>
+                    <button class="btn btn-default" id="btnModificar"><img src="~/Content/img/imagenes/lapiz.png" alt="Alternate Text" /> Modificar</button>
+                    <button class="btn btn-default" id="btneliminar"><img src="~/Content/img/imagenes/eli.png" alt="Alternate Text" /> Eliminar</button>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+
+                <table class="table table-condensed table-bordered table-hover dt-reponsive tablas" id="tblproduct">
+                    <thead>
+                        <tr>
+                            <th class="ocultar"></th>
+                            <th></th>
+                            <th>Departamentos/Seccion</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbdepart">
+                        @foreach (var item in Model.listadepartamentos)
+                        {
+                            <tr>
+                                <td class="ocultar" id="row_@item.row">@item.iddepart</td>
+                                <td><input type="checkbox" id="cbox_@item.row" /></td>
+                                <td>@item.depart</td>        
+                                @if (item.status == 1)
+                                {
+                                    <td><span style="background:#004501; color:#fff">Activo</span></td>
+                                }
+                                else
+                                {
+                                    <td><span style="background:#ff0000; color:#fff">Desactivado</span></td>
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="divnewdepartamento">
+
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <span>Departamentos</span>
+                    <input type="text" id="txtdepartamento" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br /><br />
+                <div class="col-md-3">
+                    <button class="btn btn-default" id="btnguardar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Guardar</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default btnvolver" ><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="diveditdepartamento">
+            <input type="hidden" id="txtiddepartamento" />
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <span>Departamentos</span>
+                    <input type="text" id="edittxtdepartamento" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <br /><br />
+                <div class="col-md-3">
+                    <button class="btn btn-default" id="btneditar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Modificar</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default btnvolver" ><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript" src="~/Scripts/app/departamentos.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>
+
+

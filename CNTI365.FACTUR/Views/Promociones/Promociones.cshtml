@@ -1,0 +1,234 @@
+﻿@model modelList
+@using CNTI365.FACTUR.Models
+@{
+    ViewBag.Title = "Promociones";
+}
+
+<br />
+<br />
+<br />
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <b>PRODUCTOS</b>
+        <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button class="btn btn-default" id="btncatalogo"><img src="~/Content/img/imagenes/calendario.png" alt="Alternate Text" /> Catálogo</button>
+            <button class="btn btn-default" id="btndepartamentos"><img src="~/Content/img/imagenes/departamento.png" alt="Alternate Text" /> Departamentos</button>
+            <button class="btn btn-default" id="btnpromociones"><img src="~/Content/img/imagenes/estrella.png" alt="Alternate Text" /> Promociones</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/expediente.png" alt="Alternate Text" /> Importar</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/xls.png" alt="Alternate Text" /> Exportar</button>
+        </div>
+
+        <div class="col-ms-12">
+            <center>
+                <h3 style="color:#ff6a00;" id="lblprin"> </h3>
+            </center>
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="divpromocion">
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-default" id="btnewpromo"><img src="~/Content/img/imagenes/new.png" alt="Alternate Text" /> Nuevo</button>
+                    <button class="btn btn-default" id="btnModificar"><img src="~/Content/img/imagenes/lapiz.png" alt="Alternate Text" /> Modificar</button>
+                    <button class="btn btn-default" id="btneliminar"><img src="~/Content/img/imagenes/eli.png" alt="Alternate Text" /> Eliminar</button>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+
+                <table class="table table-condensed table-bordered table-hover dt-reponsive tablas" id="tblproduct">
+                    <thead>
+                        <tr>
+                            <th class="ocultar"></th>
+                            <th></th>
+                            <th>Nombre promoción</th>
+                            <th>Producto</th>
+                            <th>Codigo barra</th>
+                            <th>P. Venta</th>
+                            <th>f. incio</th>
+                            <th>f. fin</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbpromo">
+                        @foreach (var item in Model.listaPromociones)
+                        {
+                            <tr>
+                                <td class="ocultar" id="row_@item.row">@item.idpromocion</td>
+                                <td><input type="checkbox" id="cbox_@item.row" /></td>
+                                <td>@item.nombrePromocion</td>
+                                <td>@item.descProducto</td>
+                                <td>@item.codbarra</td>
+                                <td>@item.pventa</td>
+                                <td>@item.finicio</td>
+                                <td>@item.ffin</td>
+
+                                @if (item.status == 0)
+                                {
+                                    <td>
+                                        <span style="background: #ff0000; color: #fff">Desactivado</span>
+                                    </td>
+
+                                }
+                                else if (item.status == 1)
+                                {
+                                    <td>
+                                        <span style="background: #00631a; color: #fff">Activado</span>
+                                    </td>
+
+                                }
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="divnewpromo">
+
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <input type="text" id="txtcodbarra" class="form-control" placeholder="Buscar producto por lectora de barras" />
+                    <input type="text" id="txtdescripcion" class="form-control" placeholder="Buscar producto por descripción" />
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary" id="btnlectora">Lectora</button>
+                    <button class="btn btn-info" id="btnteclado">Teclado</button>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-8">
+                    <center>
+                        <span><b><h2 id="lbldescripcion"></h2></b></span>
+                        <span><b><h3 id="lblpventa"> </h3></b></span>
+                    </center>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-6">
+                    <span><b>Nombre de la promoción</b></span>
+                    <input type="text" id="txtpromo" class="form-control" placeholder="Nombre de la promocion" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <input type="hidden" id="txtidproducto" />
+                <div class="col-md-4">
+                    <span><b>Fecha inicio</b></span>
+                    <input type="date" id="txtfinicio" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <span><b>Fecha fin</b></span>
+                    <input type="date" id="txtffin" class="form-control" />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+                <br /><br />
+                <div class="col-md-3">
+                    <button class="btn btn-default" id="btnguardar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Guardar</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default btnvolver"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="diveditpromo">
+
+            <input type="hidden" id="edittxtidpromo" />
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-8">
+                    <center>
+                        <span><b><h2 id="editlbldescripcion"></h2></b></span>
+                        <span><b><h3 id="editlblpventa"> </h3></b></span>
+                    </center>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-6">
+                    <span><b>Nombre de la promoción</b></span>
+                    <input type="text" id="edittxtpromo" class="form-control" placeholder="Nombre de la promocion" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <input type="hidden" id="edittxtidproducto" />
+                <div class="col-md-4">
+                    <span><b>Fecha inicio</b></span>
+                    <input type="date" id="edittxtfinicio" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <span><b>Fecha fin</b></span>
+                    <input type="date" id="edittxtffin" class="form-control" />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+                <br /><br />
+                <div class="col-md-3">
+                    <button class="btn btn-default" id="btnEditar"><img src="~/Content/img/imagenes/guardar.png" alt="Alternate Text" /> Modificar</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-default btnvolver"><img src="~/Content/img/imagenes/deshacer.png" alt="Alternate Text" /> Volver</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/app/promociones.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>
+

@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Panel";
+}
+
+<br /><br /><br />
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        Panel Principal
+    </div>
+
+    <div class="panel-body">
+
+        <span><label>Vendedor - Cajero:</label></span>
+
+        <center>
+            <!--Vendedor o cajero-->
+            <div class="col-md-12">
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/Vent.png" alt="Alternate Text" /> <br />
+                        <span>Vender</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/equipo.png" alt="Alternate Text" /> <br />
+                        <span>Cliente</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/dinero64.png" alt="Alternate Text" /> <br />
+                        <span>Caja</span>
+                    </a>
+                    <hr />
+                </div>
+            </div>
+        </center>
+       
+        <span><label>Almacen:</label></span>
+
+        <center>
+            <!--Almacen-->
+            <div class="col-md-12">
+                <div class="col-md-1">
+                    <a href="#" onclick="Compras();">
+                        <img src="~/Content/img/imagenes/Compras64.png" alt="Alternate Text" /> <br />
+                        <span>Compras</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" onclick="proveedores();">
+                        <img src="~/Content/img/imagenes/entrega64.png" alt="Alternate Text" /> <br />
+                        <span>Proveedores</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" onclick="productos();">
+                        <img src="~/Content/img/imagenes/cajas.png" alt="Alternate Text" /> <br />
+                        <span>Productos</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#" onclick="inventario();">
+                        <img src="~/Content/img/imagenes/inventario64.png" alt="Alternate Text" /> <br />
+                        <span>Inventario</span>
+                    </a>
+                    <hr />
+                </div>
+               
+            </div>
+        </center>
+
+      
+        <span><label>Administrador:</label></span>
+
+        <center>
+            <!--Administrador-->
+            <div class="col-md-12">
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/Dashboard64.png" alt="Alternate Text" /> <br />
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+
+                <div class="col-md-1">
+                    <a href="#" onclick="empleados();">
+                        <img src="~/Content/img/imagenes/Accesos64.png" alt="Alternate Text" /> <br />
+                        <span>Empleados</span>
+                    </a>
+                </div>
+
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/Empresa64.png" alt="Alternate Text" /> <br />
+                        <span>Empresa</span>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <a href="#">
+                        <img src="~/Content/img/imagenes/Configuraciones64.png" alt="Alternate Text" /> <br />
+                        <span>Configuraciones</span>
+                    </a>
+                </div>
+            </div>
+        </center>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="~/Scripts/app/panel.js"></script>
+

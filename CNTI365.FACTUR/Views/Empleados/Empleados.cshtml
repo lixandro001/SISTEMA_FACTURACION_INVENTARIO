@@ -1,0 +1,375 @@
+﻿@model modelList
+@using CNTI365.FACTUR.Models
+
+@{
+    ViewBag.Title = "Empleados";
+}
+
+<br /><br /><br />
+
+<div class="panel panel-success">
+
+    <div class="panel-heading">
+        <label><b><span id="lblinicial"></span></b></label>
+
+        <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+
+    </div>
+
+    <div class="panel-body">
+
+        <div id="divlistaempleados">
+
+
+
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-info btn-sm" style="float:right;" id="newempleado"><i class="fa fa-plus-square"></i> Nuevo</button>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <hr />
+                <div class="col-md-12">
+
+                    <table class="table table-condensed table-bordered table-hover dt-reponsive tablas">
+                        <thead>
+                            <tr>
+                                <th>Nombres y apellidos</th>
+                                <th>DNI</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Cargo</th>
+                                <th>Estado</th>
+                                <th>opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.listaEmpleados)
+                            {
+                                <tr>
+                                    <td>@item.username</td>
+                                    <td>@item.dni</td>
+                                    <td>@item.user</td>
+                                    <td>@item.email</td>
+                                    <td>@item.cargo</td>
+
+                                    @if (item.status == 0)
+                                    {
+                                        <td>
+                                            <span style="background: #ff0000; color: #fff">Desactivado</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-sm btnactivar" Activar="@item.iduser"><i class="fa fa-check"></i></button>
+                                            <button type="button" class="btn btn-danger btn-sm btneliminar" Eliminar="@item.iduser"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    }
+                                    else if (item.status == 1)
+                                    {
+                                        <td>
+                                            <span style="background: #00631a; color: #fff">Activado</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm btndesactivar" Desactivar="@item.iduser"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-warning btn-sm btneditar" editar="@item.iduser"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    }
+
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="divregistrarempleados">
+
+            <div class="col-md-12">
+
+                <div class="col-md-9">
+                    <span><label><b>Nombres y apellidos:</b></label></span>
+                    <input type="text" class="form-control" id="txtusername" placeholder="Ingrese el nombre y apellido" required />
+                    <span id="msjnombre"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <span><label><b>DNI:</b></label></span>
+                    <input type="text" class="form-control" id="txtdni" placeholder="Ingrese el dni" required maxlength="8" onkeypress="return solonumeros(event)" />
+                    <span id="msjdni"></span>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-6">
+                    <span><label><b>Email:</b></label></span>
+                    <input type="text" class="form-control" id="txtemail" placeholder="Ingrese el email" required />
+                    <span id="msjemail"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <span><label><b>Usuario:</b></label></span>
+                    <input type="text" class="form-control" id="txtusuario" placeholder="Ingrese el usuario" required />
+                    <span id="msjuser"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <span><label><b>Contraseña:</b></label></span>
+                    <input type="password" class="form-control" id="txtcontraseña" placeholder="Ingrese la contraseña" required />
+                    <div class="show-eye"><i class="fa fa-eye" id="faeye"></i></div>
+                    <div class="show-eye-slash"><i class="fa fa-eye-slash" id="faeyeslash"></i></div>
+                    <span id="msjpassword"></span>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-3">
+                    <span><label><b>Cargo</b></label></span>
+                    <select class="form-control" id="txtcargo">
+                        <option value="0">Seleccione un cargo</option>
+                        @foreach (var itm in Model.listarCargos)
+                        {
+                            <option value="@itm.idcargo">@itm.cargo</option>
+                        }
+                    </select>
+                    <span id="msjslcargo"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-3">
+                    <label><b>Accesos a modulos</b></label>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="chventas" /> Ventas
+                    &nbsp;
+                    <input type="checkbox" id="chclientes" /> Clientes
+                    &nbsp;
+                    <input type="checkbox" id="chcaja" /> caja
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="chcompras" /> Compras
+                    &nbsp;
+                    <input type="checkbox" id="chproductos" /> Productos
+                    &nbsp;
+                    <input type="checkbox" id="chinventario" /> Inventario
+                    &nbsp;
+                    <input type="checkbox" id="chproveedores" /> Proveedores
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="chdashboard" /> Dashboard
+                    &nbsp;
+                    <input type="checkbox" id="chusuarios" /> usuarios
+                    &nbsp;
+                    <input type="checkbox" id="chempesa" /> Empresa
+                    &nbsp;
+                    <input type="checkbox" id="chconfiguraciones" /> Configuraciones
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success " id="btnregistrar"> <i class=" fa fa-floppy-o"></i> Registrar</button>
+                    <button type="button" class="btn btn-danger" id="btnvolver"> <i class=" fa fa-reply"></i> Volver</button>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+
+
+                <div class="col-md-6">
+                    <label><b>Requisitos de la contraseña:</b></label><br />
+                    &nbsp;&nbsp;<span>- Debe tener una mayúscula</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener una minuscula</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener un caracter especial</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener como mínimo 8 caracteres</span>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div id="diveditarempleados">
+
+            <div class="col-md-12">
+
+                <div class="col-md-9">
+                    <span><label><b>Nombres y apellidos:</b></label></span>
+                    <input type="text" class="form-control" id="txteditusername" placeholder="Ingrese el nombre y apellido" required />
+                    <span id="msjeditnombre"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <span><label><b>DNI:</b></label></span>
+                    <input type="text" class="form-control" id="txteditdni" placeholder="Ingrese el dni" required maxlength="8" onkeypress="return solonumeros(event)" />
+                    <span id="msjeditdni"></span>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-4">
+                    <span><label><b>Email:</b></label></span>
+                    <input type="text" class="form-control" id="txteditemail" placeholder="Ingrese el email" required />
+                    <span id="msjeditemail"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <span><label><b>Usuario:</b></label></span>
+                    <input type="text" class="form-control" id="txteditusuario" placeholder="Ingrese el usuario" required disabled/>
+                    <span id="msjedituser"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <span><label><b>Contraseña:</b></label></span>
+                    <input type="password" class="form-control" id="txteditcontraseña" placeholder="Ingrese la contraseña" required disabled value="****************" />                    
+                    <div class="show-eye"><i class="fa fa-eye" id="faeyeedit"></i></div>
+                    <div class="show-eye-slash"><i class="fa fa-eye-slash" id="faeyeslashedit"></i></div>
+                    <span id="msjeditpassword"></span>
+                </div>
+                <div class="col-md-1">
+                    <span style="color:#fff;"><label><b>edit </b></label></span>
+                    <button type="button" class="btn btn-sm btn-info" id="btneditpass"><i class="fa fa-pencil-square-o"></i></button>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-3">
+                    <span><label><b>Cargo</b></label></span>
+                    <select class="form-control OneItem" id="txteditcargo">
+                        <option id="obt"></option>
+                        @foreach (var itm in Model.listarCargos)
+                        {
+                            <option value="@itm.idcargo">@itm.cargo</option>
+                        }
+                    </select>
+                    <span id="msjeditslcargo"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-3">
+                    <label><b>Accesos a modulos</b></label>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="editchventas" /> Ventas
+                    &nbsp;
+                    <input type="checkbox" id="editchclientes" /> Clientes
+                    &nbsp;
+                    <input type="checkbox" id="editchcaja" /> caja
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="editchcompras" /> Compras
+                    &nbsp;
+                    <input type="checkbox" id="editchproductos" /> Productos
+                    &nbsp;
+                    <input type="checkbox" id="editchinventario" /> Inventario
+                    &nbsp;
+                    <input type="checkbox" id="editchproveedores" /> Proveedores
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <input type="checkbox" id="editchdashboard" /> Dashboard
+                    &nbsp;
+                    <input type="checkbox" id="editchusuarios" /> usuarios
+                    &nbsp;
+                    <input type="checkbox" id="editchempesa" /> Empresa
+                    &nbsp;
+                    <input type="checkbox" id="editchconfiguraciones" /> Configuraciones
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <br />
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success " id="btneditar"> <i class=" fa fa-pencil"></i> Editar</button>
+                    <button type="button" class="btn btn-danger" id="btneditvolver"> <i class=" fa fa-reply"></i> Volver</button>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-12">
+                <br />
+
+                <input type="hidden" class="form-control" id="txtiduser"  />
+
+                <div class="col-md-6">
+                    <label><b>Requisitos de la contraseña:</b></label><br />
+                    &nbsp;&nbsp;<span>- Debe tener una mayúscula</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener una minuscula</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener un caracter especial</span><br />
+                    &nbsp;&nbsp;<span>- Debe tener como mínimo 8 caracteres</span>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="~/Scripts/app/empleados.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>

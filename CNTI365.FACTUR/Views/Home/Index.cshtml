@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login</title>
+
+    <!-- CSS -->
+    <link href="~/Content/plugins/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/style/style_login.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="~/Content/plugins/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/plugins/js/bootstrap.min.js"></script>
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.all.js"></script>
+
+    <script>
+        var appURL = "@Url.Content("~/")";
+    </script>
+</head>
+<body>
+
+    <div class="login">
+
+
+        <form action="/" method="post">
+
+            <div class="col-md-12">
+                <CENTER> <h1>SOLUCIONES GOMEZ</h1> </CENTER>
+             </div>
+            <br /><br />
+
+            <div class="col-md-12">
+                <div class="text" style="color:darkblue" >Login</div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="text" name="txtrucdni" id="txtrucdni" required onkeypress="return solonumeros(event)" />
+                        <div class="underline"></div>
+                        <label>RUC o DNI</label>
+                        <span id="msjrucdni"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="text" name="txtuser" id="txtuser" required />
+                        <div class="underline"></div>
+                        <label>Usuario</label>
+                        <span id="msjuser"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-row">
+                    <div class="input-data">
+                        <input type="password" name="txtpassword" id="txtpassword" required />
+                        <div class="show-eye"><i class="fa fa-eye" id="faeye"></i></div>
+                        <div class="show-eye-slash"><i class="fa fa-eye-slash" id="faeyeslash"></i></div>
+                        <div class="underline"></div>
+                        <label>Contraseña</label>
+                        <span id="msjpasswords"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <span class="msjerroracceso"></span>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-row">
+
+                    <button type="button" class="btn btn-success btn-block btn-success" id="btningresar">Ingresar</button>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="lbllogin">
+                    <span><a href="#">Recuperar contraseña</a></span>
+                    &nbsp;   &nbsp;   &nbsp;
+                    <span><a href="@Url.Action("RegistroEmpresa","RegistroEmpresa")">Registrarse</a></span>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="~/Scripts/js/global.js"></script>
+<script type="text/javascript" src="~/Scripts/app/login.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>
+ 
+
+
+
+

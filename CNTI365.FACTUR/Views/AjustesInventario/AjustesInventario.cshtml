@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "AjustesInventario";
+}
+
+<br />
+<br />
+<br />
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <b>INVENTARIOS</b>
+        <button type="button" class="btn btn-danger btn-sm" style="float:right;" id="cerrarModulo"><i class="fa fa-window-close"></i></button>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button class="btn btn-default" id="btnagregarinventario"><img src="~/Content/img/imagenes/anadir.png" alt="Alternate Text" /> Agregar</button>
+            <button class="btn btn-default" id="btnajustesinventario"><img src="~/Content/img/imagenes/lapizi.png" alt="Alternate Text" /> Ajustes</button>
+            <button class="btn btn-default" id="btnpromociones"><img src="~/Content/img/imagenes/cuaderno.png" alt="Alternate Text" /> Productos bajos en inventario</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/reporte.png" alt="Alternate Text" /> Reporte de inventario</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/estudiar.png" alt="Alternate Text" /> Reporte de movimientos</button>
+            <button class="btn btn-default"><img src="~/Content/img/imagenes/reporte-de-negocios.png" alt="Alternate Text" /> Kardex de inventario</button>
+        </div>
+
+        <div class="col-ms-12">
+            <center>
+                <h3 style="color:#5005a4;" id="lblprin"> </h3>
+            </center>
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="divagregarinventario">
+
+            <div class="col-md-12">
+
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="txtletora" placeholder="Buscar por codigo del producto" />
+                    <input type="text" class="form-control" id="txtteclado" placeholder="Buscar por descripción del producto" />
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success" id="btnlectora">Lectora</button>
+                    <button type="button" class="btn btn-info" id="btnteclado">Teclado</button>
+                </div>
+
+            </div>
+
+
+            <div class="oculto">
+
+                <input type="text" class="form-control" id="txtidproducto" hidden />
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Descripción:</b> </span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span id="lbldescripcion"> </span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Existencias:</b> </span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span id="lblexistencias"> </span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Precio costo:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="txtcosto" placeholder="0.00" />
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Ganancia:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="txtganancia" placeholder="0.00" />
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Precio venta:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="txtprecioventa" placeholder="0.00" disabled />
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Precio Mayoreo:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="txtganancia" placeholder="0.00" />
+                    </div>
+
+                    <div class="col-md-1">
+                        <span><b>Apartir:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="txtaparti" placeholder="0" />
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Mas(+)/Menos(-)</b></span>
+                    </div>
+
+                    <div class="col-md-1">
+                        <input type="checkbox" id="txtmas" placeholder="0" /> +
+                        <input type="checkbox" id="txtmenos" placeholder="0" /> -
+                    </div>
+                    <div class="col-md-1">
+                      
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-2">
+                        <span><b>Agregar:</b> </span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" id="txtagregarcantidad" placeholder="0" />
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-6">
+                        <center>
+                            <button type="button" class="btn btn-default" id="btnagregar">
+                                <img src="~/Content/img/imagenes/inventario32.png" />
+                                Ajustar cantidad a Inventario
+                            </button>
+                        </center>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <br />
+                    <div class="col-md-6" style="background:#f2ed88">
+                        <center>
+                            <span id="lblmensajeexisten"></span>
+                        </center>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/app/ajustesinventario.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>

@@ -1,0 +1,278 @@
+﻿@model modelList
+@using CNTI365.FACTUR.Models
+@{
+    ViewBag.Title = "RegistroEmpresa";
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registro de empresa</title>
+
+    <!-- CSS -->
+    <link href="~/Content/plugins/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/style/style.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="~/Content/plugins/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/plugins/js/bootstrap.min.js"></script>
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.all.js"></script>
+
+    <script>
+        var appURL = "@Url.Content("~/")";
+    </script>
+
+</head>
+
+<body>
+    <br /><br /><br />
+
+    <div class="container">
+
+        <div class="row">
+
+            <form action="/" method="post">
+
+                <div class="divregistroempresa" style="display:block">
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <span><label><b>Registrar empresa</b></label></span>
+                        </div>
+                    </div>
+
+                    <br /><br /><br />
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <img src="~/Content/img/img_logo/TuLogo.png" alt="Avtar" width="80px" class="img-circle previsualizar" />
+                            <label for="imagen" class="input-label"><i class="fa fa-cloud-upload"></i>Subir imagen</label><input type="file" name="imagen" id="imagen" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <span><label><b>Razon Social:</b></label></span>
+                            <input type="text" class="form-control" id="txtrazonsocail" name="txtrazonsocail" placeholder="Razon Social" />
+                            <span id="msjrazonsocail"></span>
+                        </div>
+
+                        <div class="col-md-3">
+                            <span><label><b>RUC:</b></label></span>
+                            <input type="text" class="form-control" id="txtruc"  name="txtruc"placeholder="RUC" maxlength="11" required onkeypress="return solonumeros(event)" />
+                            <span id="msjruc"></span>
+                            <br />
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <span><label><b>Email:</b></label></span>
+                            <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="Email" />
+                            <span id="msjemail"></span>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label><b>Pais:</b></label></span>
+                            <select class="form-control" id="slpais" name="slpais">
+                                @foreach (var item in Model.listPais)
+                                {
+                                    <option value="@item.idpais">@item.pais</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label><b>Moneda:</b></label></span>
+                            <select class="form-control" id="slmoneda" name="slmoneda">
+                                @foreach (var item in Model.listMoneda)
+                                {
+                                    <option value="@item.idmoneda">@item.moneda</option>
+                                }
+                            </select>
+
+                            <br />
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                        </div>
+
+                        <div class="col-md-9">
+                            <span><label><b>Direccion:</b></label></span>
+                            <input type="text" class="form-control" id="txtdireccion" name="txtdireccion" placeholder="Dirección" />
+                            <br />
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label><b>¿Vende con impuesto?</b></label></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            SI <input type="radio" id="rdsi"  name="rdsi" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            NO <input type="radio" id="rdno" name="rdno"/>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12" id="divvendeimpuestos">
+                        <br />
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label><b>Tipo Impuesto:</b></label></span>
+                            <select class="form-control" id="sltipoimpuesto" name="sltipoimpuesto">
+                                @foreach (var item in Model.listTImpuesto)
+                                {
+                                    <option value="@item.idtimpuestos">@item.timpuestos</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label><b>Porcentaje:</b></label></span>
+                            <select class="form-control" id="slporcentaje" name="slporcentaje">
+                                @foreach (var item in Model.listPImpuestos)
+                                {
+                                    <option value="@item.idpimpuestos">@item.pimpuestos</option>
+                                }
+                            </select>
+
+                            <br />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <br />
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-default " id="btnsiguiente">
+                                <img src="~/Content/img/imagenes/flecha-correcta.png" /> Siguiente
+                            </button>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger " id="btncancelar">Cancelar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="divregistrousersuperadmin" style="display:none;">
+
+                    <div class="col-md-12">
+
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <span><label>Nombre administrador</label></span>
+                            <input type="text" class="form-control" id="txtusername" name="txtusername" placeholder="Ingrese el nombre" required />
+                            <span id="msjusername"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <br />
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <span><label>Usuario</label></span>
+                            <input type="text" class="form-control" id="txtusuario" name="txtusuario"  placeholder="Ingrese el usuario" required />
+                            <span id="msjusuario"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span><label>Contraseña:</label></span>
+                            <input type="password" class="form-control" id="txtcontraseña" name="txtcontraseña" placeholder="Ingrese la contraseña" required />
+                            <div class="show-eye"><i class="fa fa-eye" id="faeye"></i></div>
+                            <div class="show-eye-slash"><i class="fa fa-eye-slash" id="faeyeslash"></i></div>
+                            <span id="msjpassword"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span><label>Confirmar contraseña:</label></span>
+                            <input type="password" class="form-control" id="txtconfircontraseña" name="txtconfircontraseña" placeholder="Confirma la contraseña" required />
+                            <div class="show-eye-confir"><i class="fa fa-eye" id="confirfaeye"></i></div>
+                            <div class="show-eye-slash-confir"><i class="fa fa-eye-slash" id="confirfaeyeslash"></i></div>
+                            <span id="msjconfirpassword"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <br />
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger " id="btnatras">
+                                <img src="~/Content/img/imagenes/flecha-izquierda.png" /> Atras
+                            </button>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-default " id="btnregistrar">
+                                <img src="~/Content/img/imagenes/salvar.png" /> Registrar
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <br />
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <label><b>Requisitos de la contraseña:</b></label><br />
+                            &nbsp;&nbsp;<span>- Debe tener una mayúscula</span><br />
+                            &nbsp;&nbsp;<span>- Debe tener una minuscula</span><br />
+                            &nbsp;&nbsp;<span>- Debe tener un caracter especial</span><br />
+                            &nbsp;&nbsp;<span>- Debe tener como mínimo 8 caracteres</span>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="~/Scripts/app/registroempresa.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validaciones.js"></script>
+<script type="text/javascript" src="~/Scripts/js/global.js"></script>
+<script type="text/javascript" src="~/Scripts/js/validacionPassword.js"></script>
+
